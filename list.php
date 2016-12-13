@@ -9,7 +9,7 @@
   <meta name="Description" content="">
   <title>Document</title>
  <link rel="stylesheet" href="common.css" type="text/css" />
-    <script src="js/echarts.js"></script>
+    <script src="js/echarts.min.js"></script>
     <script src="js/jquery-1.10.2.min.js"></script>
 </head>
  <body>
