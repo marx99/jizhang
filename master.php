@@ -16,26 +16,12 @@
 	<?php require_once("header.php");?>
 
 <div id="main">
-	<?php
-/*
-$servername = "localhost";
-$username = "root";
-$password = "1";
-$dbname = "jizhang";
+<form name="form1" method="post" action="master_result.php">
+<?php
 
-// 创建连接
-$conn = new mysqli($servername, $username, $password,$dbname);
- 
-// 检测连接
-if ($conn->connect_error) {
-    die("连接失败: " . $conn->connect_error);
-} 
-//echo "连接成功";
-//exit();
-*/
 	$conn = connect();
 
-	$sql = "SELECT item_id, item_no, item_name,status FROM master";
+	$sql = "SELECT item_id, item_no, item_name,status FROM master ORDER BY item_id,item_no";
 	$result = $conn->query($sql);
 
 	if ($result) {
@@ -45,6 +31,17 @@ if ($conn->connect_error) {
 			$item_no[$row["item_id"]][] = $row["item_no"];
 			$item_name[$row["item_id"]][] = $row["item_name"];
 			$status[$row["item_id"]][] = $row["status"];
+		}
+	} else {
+		echo "0 个结果";exit();
+	}
+	$sql = "SELECT item_id, max(item_no) as item_no FROM master group by item_id";
+	$result = $conn->query($sql);
+
+	if ($result) {
+		// 输出每行数据
+		while($row = $result->fetch_assoc()) {
+			$item_no_max[$row["item_id"]] = $row["item_no"];
 		}
 	} else {
 		echo "0 个结果";exit();
@@ -68,8 +65,8 @@ if ($conn->connect_error) {
 		$i=0;
 		while($i < count($item_no[$x])){
 			print '<tr>';
-			print '<td class="display-none">'.$item_no[$x][$i].'</td>';
-			print '<td><input type="text" name="item_name" value="'.$item_name[$x][$i].'"></input></td>';
+			print '<td><input type="text" style="width:30px;" name="item_no_'.$x.'_'.$i.'" value="'.$item_no[$x][$i].'" readonly=true></input></td>';
+			print '<td><input type="text" name="item_name_'.$x.'_'.$i.'" value="'.$item_name[$x][$i].'"></input></td>';
 			print '<td>'.$status[$x][$i].'</td>';
 			print '</tr>';
 			$i++;
@@ -77,18 +74,24 @@ if ($conn->connect_error) {
 		print '</table>';
 		print '<br>';
 		if ($x==1){
-			print '<p><input type="button" id="account_add" value="添加" onclick="account_add();"></input></p>';
+			print '<p><input type="button" id="account_add" value="添加" ></input></p>';
 		}
 		elseif ($x==2){
-			print '<p><input type="button" id="shouru_add" value="添加" onclick="shouru_add();"></input></p>';
+			print '<p><input type="button" id="shouru_add" value="添加" ></input></p>';
 		}
 		elseif ($x==3){
-			print '<p><input type="button" id="zhichu_add" value="添加" onclick="zhichu_add();"></input></p>';
+			print '<p><input type="button" id="zhichu_add" value="添加" ></input></p>';
 		}
 		print '<br>';
 		$x++;
 	}
 ?>
+<!-- 最大item_no取得，追加时使用 -->
+<input type="hidden" name="max_1" id="max_1" value="<?= $item_no_max["1"] ?>"></input>
+<input type="hidden" name="max_2" id="max_2" value="<?= $item_no_max["2"] ?>"></input>
+<input type="hidden" name="max_3" id="max_3" value="<?= $item_no_max["3"] ?>"></input>
+<p><input type="submit" id="add" style="width:60px;" value="登录" ></input></p>
+</form>
 </div>
  </body>
 </html>
