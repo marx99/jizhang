@@ -32,7 +32,7 @@
 			echo "0 个结果";exit();
 		}
 
-		$sql = "SELECT item_id, item_no, item_name,status FROM master WHERE item_id=1";
+		$sql = "SELECT item_id, item_no, item_name,status FROM master WHERE item_id=1 ORDER BY item_no";
 		$result = $conn->query($sql);
 
 		if ($result) {
@@ -58,7 +58,7 @@
 				print '<INPUT type="hidden" name="item_no_'.$x.'" value="'.$row["item_no"].'">';
 				$x++;
 			}
-			print '</table>';
+			print '</table><br>';
 			print '<INPUT type="hidden" name="cnt" value="'.$x.'">';
 			//print '<p><INPUT type="submit" value="确认"></p>';
 			//print '</form>';

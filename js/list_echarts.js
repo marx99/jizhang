@@ -24,6 +24,9 @@
   }
   arrTest();
   var  option = {
+    title: {
+        text: '账户一览'
+    },
 		tooltip: {
 			show: true
 		},
@@ -43,7 +46,7 @@
 		],
 		series : [
 			{
-				"name":"age",
+				"name":"账户余额",
 				"type":"bar",
 				"data":arr2
 			}

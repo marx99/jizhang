@@ -25,8 +25,8 @@
 			print '<h3>明细一览</h3>';
 			print '<table border="1" cellpadding="3" cellspacing="0" class="data" bordercolor="#C0C0C0">';
 			print '<tr>';
-			print '<th style="width:60px;">时间</th>';
-			print '<th style="width:80px;">收支</th>';
+			print '<th style="width:60px;">收支</th>';
+			print '<th style="width:80px;">时间</th>';
 			print '<th style="width:80px;">分类</th>';
 			print '<th style="width:80px;">数额</th>';
 			print '<th style="width:150px;">备注</th>';

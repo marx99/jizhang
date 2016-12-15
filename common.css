@@ -330,3 +330,12 @@ p.nodisp {
 .width-100 {
 	width: 100;
 }
+
+.div-overflow-scroll
+{
+    width: 748px;
+    min-height: 50px;
+    max-height: 370px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
